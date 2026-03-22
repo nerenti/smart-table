@@ -42,10 +42,15 @@ function render(action) {
      // состояние полей из таблицы
     let result = [...data]; // копируем для последующего изменения
     // @todo: использование
-result = applySearch(result, state, action); 
-result = applyFiltering(result, state, action); 
-result = applySorting(result, state, action); 
+; 
+
+result = applySearch(result, state, action)
+result = applyFiltering(result, state, action);
+result = applySorting(result, state, action);
 result = applyPagination(result, state, action);
+ 
+ 
+
     sampleTable.render(result)
 }
 
