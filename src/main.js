@@ -51,7 +51,7 @@ function render(action) {
     // @todo: использование
 
 
-result = applySearch(result, state, action);
+result = applySearching(result, state, action);
  result = applyFiltering(result, state, action); 
     result = applySorting(result, state, action);   
     result = applyPagination(result, state, action);
@@ -89,7 +89,7 @@ const applyFiltering = initFiltering(sampleTable.filter.elements, {    // пер
     searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
 })
 ; 
-const applySearch = initSearching('search');
+const applySearching = initSearching('search');
  // @todo: инициализация
 
 

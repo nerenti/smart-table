@@ -28,6 +28,5 @@ totalRows.textContent = data.length;// @todo: #2.5 — обновить стат
 
         const skip = (page - 1) * rowsPerPage;            // сколько строк нужно пропустить
 return data.slice(skip, skip + rowsPerPage);// @todo: #2.2 — посчитать сколько строк нужно пропустить и получить срез данных
-        return data.slice(0, 10);
     }
 }
