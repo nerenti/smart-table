@@ -7,10 +7,12 @@ import {initData} from "./data.js";
 import {processFormData} from "./lib/utils.js";
 
 import {initTable} from "./components/table.js" ;
-import {initPagination} from "./components/pagination.js";
-import {initSorting} from "./components/sorting.js";
-import {initFiltering} from "./components/filtering.js";
 import {initSearching} from "./components/searching.js";
+import {initFiltering} from "./components/filtering.js";
+import {initSorting} from "./components/sorting.js";
+import {initPagination} from "./components/pagination.js";
+
+
 // @todo: подключение
 
 
@@ -24,12 +26,17 @@ const {data, ...indexes} = initData(sourceData);
 function collectState() {
     const state = processFormData(new FormData(sampleTable.container));
 const rowsPerPage = parseInt(state.rowsPerPage);    // приведём количество страниц к числу
-const page = parseInt(state.page ?? 1);                // номер страницы по умолчанию 1 и тоже число
+const page = parseInt(state.page ?? 1);  
+const totalFrom = state.totalFrom ? parseFloat(state.totalFrom) : null;   
+const totalTo = state.totalTo ? parseFloat(state.totalTo) : null;           // номер страницы по умолчанию 1 и тоже число
 
 return {                                            // расширьте существующий return вот так
     ...state,
     rowsPerPage,
-    page
+    page, 
+    totalFrom, 
+    totalTo,
+    total: [totalFrom, totalTo]
 }; 
 }
 
@@ -42,12 +49,12 @@ function render(action) {
      // состояние полей из таблицы
     let result = [...data]; // копируем для последующего изменения
     // @todo: использование
-; 
 
-result = applySearch(result, state, action)
-result = applyFiltering(result, state, action);
-result = applySorting(result, state, action);
-result = applyPagination(result, state, action);
+
+result = applySearch(result, state, action);
+ result = applyFiltering(result, state, action); 
+    result = applySorting(result, state, action);   
+    result = applyPagination(result, state, action);
  
  
 
@@ -82,10 +89,7 @@ const applyFiltering = initFiltering(sampleTable.filter.elements, {    // пер
     searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
 })
 ; 
-const applySearch = initSearching(
-  sampleTable.filter.elements.search,
-  'search' 
-);
+const applySearch = initSearching('search');
  // @todo: инициализация
 
 
