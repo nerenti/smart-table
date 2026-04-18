@@ -2,7 +2,6 @@ export function initFiltering(elements) {
     const updateIndexes = (elements, indexes) => {
         Object.keys(indexes).forEach((elementName) => {
             if (elements[elementName]) {
-                elements[elementName].innerHTML = '';
                 elements[elementName].append(
                     ...Object.values(indexes[elementName]).map(name => {
                         const el = document.createElement('option');
